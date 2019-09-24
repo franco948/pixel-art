@@ -79,6 +79,7 @@ function crearGrillaPixeles()
     pixel.hover(function() {
       if(clickApretado)
       {
+        // TODO refactorizar en la funcion pintar
         var selectedColor = $('#indicador-de-color').css('background-color');
         $(this).css('background-color', selectedColor);
       }
@@ -110,6 +111,11 @@ $('#flash').click(function() {
 
 $('#invisible').click(function() {
   cargarSuperheroe(invisible);
+});
+
+// Guardar grilla de pixeles como una imagen
+$('#guardar').click(function() {
+  guardarPixelArt();
 });
 
 // Crear componentes del Proyecto
