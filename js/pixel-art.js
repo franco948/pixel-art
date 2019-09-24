@@ -88,10 +88,28 @@ function crearGrillaPixeles()
   }
 }
 
+// Se encarga de borrar todos los pixeles de la grilla al hacer click en el boton
 $('#borrar').click(function() {
   $('#grilla-pixeles div').each(function(pixel) {
     $(this).animate({ 'background-color': 'white'}, 'slow');
   })
+});
+
+// Cargar un Superheroe en la grilla de pixeles
+$('#batman').click(function() {
+  cargarSuperheroe(batman);
+});
+
+$('#wonder').click(function() {
+  cargarSuperheroe(wonder);
+});
+
+$('#flash').click(function() {
+  cargarSuperheroe(flash);
+});
+
+$('#invisible').click(function() {
+  cargarSuperheroe(invisible);
 });
 
 // Crear componentes del Proyecto
