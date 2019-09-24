@@ -29,15 +29,21 @@ colorPersonalizado.addEventListener('change',
     // Se guarda el color de la rueda en colorActual
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
-    $('#indicador-de-color').css('background-color', colorActual);
+    cambiarColorIndicado(colorActual);
   })
 );
 
 // Mis variables Globales
 var grillaPixeles = $('#grilla-pixeles');
 var paleta = $('#paleta');
+var clickApretado = false;
 
 // Mis funciones
+function cambiarColorIndicado(color)
+{
+  $('#indicador-de-color').css('background-color', color);
+}
+
 function crearPaletaDeColores()
 {
   for (var i = 0; i < nombreColores.length; i++)
@@ -48,23 +54,34 @@ function crearPaletaDeColores()
      color.css('background-color', nombreColores[i]);
      color.click(function() {
        var backgroundColor = $(this).css('background-color');
-       $('#indicador-de-color').css('background-color', backgroundColor);
+       cambiarColorIndicado(backgroundColor);
      });
 
      paleta.append(color);
   }
 } 
 
+function pintar() 
+{
+  // Agregar if para que no pinte cuando no se seleccione ningun color
+  var selectedColor = $('#indicador-de-color').css('background-color');
+  $(this).css('background-color', selectedColor);
+}
+
 function crearGrillaPixeles()
 {
   for (var i = 0; i < 1750; i++)
   {
     var pixel = $(document.createElement('div'));
-    
-    pixel.click(function() {
-      // Agregar if para que no pinte cuando no se seleccione ningun color
-      var selectedColor = $('#indicador-de-color').css('background-color');
-      $(this).css('background-color', selectedColor);
+
+    pixel.click(pintar);    
+
+    pixel.hover(function() {
+      if(clickApretado)
+      {
+        var selectedColor = $('#indicador-de-color').css('background-color');
+        $(this).css('background-color', selectedColor);
+      }
     });
 
     grillaPixeles.append(pixel);
@@ -74,3 +91,6 @@ function crearGrillaPixeles()
 // Crear componentes del Proyecto
 crearPaletaDeColores();
 crearGrillaPixeles();
+
+$('body').mousedown(function() { clickApretado = true; });
+$('body').mouseup(function() { clickApretado = false; });
