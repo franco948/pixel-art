@@ -88,6 +88,12 @@ function crearGrillaPixeles()
   }
 }
 
+$('#borrar').click(function() {
+  $('#grilla-pixeles div').each(function(pixel) {
+    $(this).animate({ 'background-color': 'white'}, 'slow');
+  })
+});
+
 // Crear componentes del Proyecto
 crearPaletaDeColores();
 crearGrillaPixeles();
