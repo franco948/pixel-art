@@ -30,6 +30,47 @@ colorPersonalizado.addEventListener('change',
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
 
-
   })
 );
+
+// Mis variables Globales
+var grillaPixeles = $('#grilla-pixeles');
+var paleta = $('#paleta');
+
+// Mis funciones
+function crearPaletaDeColores()
+{
+  for (var i = 0; i < nombreColores.length; i++)
+  {
+     var color = $(document.createElement('div'));
+     
+     color.addClass('color-paleta');    
+     color.css('background-color', nombreColores[i]);
+     color.click(function() {
+       var backgroundColor = $(this).css('background-color');
+       $('#indicador-de-color').css('background-color', backgroundColor);
+     });
+
+     paleta.append(color);
+  }
+} 
+
+function crearGrillaPixeles()
+{
+  for (var i = 0; i < 1750; i++)
+  {
+    var pixel = $(document.createElement('div'));
+    
+    pixel.click(function() {
+      // Agregar if para que no pinte cuando no se seleccione ningun color
+      var selectedColor = $('#indicador-de-color').css('background-color');
+      $(this).css('background-color', selectedColor);
+    });
+
+    grillaPixeles.append(pixel);
+  }
+}
+
+// Crear componentes del Proyecto
+crearPaletaDeColores();
+crearGrillaPixeles();
